@@ -1,0 +1,1416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#3b241d" />
+    <meta
+      name="description"
+      content="KP Cafe — your cozy coffee stop in Gulberg, Lahore. Fresh espresso, warm pastries, crepes, bagels and roasted coffee bags. Dine in, take away or order ahead."
+    />
+    <title>KP Cafe — Cozy Coffee, Fresh Pastries & Roasted Beans</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              almond: {
+                50: '#fdf9f4',
+                100: '#f8efe2',
+                200: '#f0dfc8',
+                300: '#e5c9a6',
+                400: '#d7ae80',
+                500: '#c8945c',
+              },
+              coffee: {
+                100: '#f2e7df',
+                200: '#dcc4b4',
+                300: '#bf9b84',
+                400: '#a3765c',
+                500: '#855943',
+                600: '#6b4433',
+                700: '#52332a',
+                800: '#3b241d',
+                900: '#2a1813',
+              },
+            },
+            fontFamily: {
+              display: ['"Playfair Display"', 'Georgia', 'serif'],
+              sans: ['"Outfit"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 84px;
+      }
+      body {
+        background-color: #fdf9f4;
+        color: #3b241d;
+        font-family: 'Outfit', sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* Animations */
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-12px); }
+      }
+      @keyframes floatSlow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-18px); }
+      }
+      @keyframes steam {
+        0% { transform: translateY(0) scaleX(1); opacity: 0; }
+        25% { opacity: 0.6; }
+        100% { transform: translateY(-46px) scaleX(1.8); opacity: 0; }
+      }
+      @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      @keyframes kenburns {
+        0% { transform: scale(1) translate(0, 0); }
+        100% { transform: scale(1.16) translate(-1.5%, -1.5%); }
+      }
+      @keyframes blob {
+        0%, 100% { border-radius: 46% 54% 62% 38% / 52% 44% 56% 48%; transform: translate(0, 0) rotate(0deg); }
+        50% { border-radius: 58% 42% 40% 60% / 44% 58% 42% 56%; transform: translate(14px, -16px) rotate(8deg); }
+      }
+
+      .animate-float { animation: float 6s ease-in-out infinite; }
+      .animate-float-slow { animation: floatSlow 9s ease-in-out infinite; }
+      .animate-steam-1 { animation: steam 3.4s ease-in-out infinite; }
+      .animate-steam-2 { animation: steam 3.4s ease-in-out infinite 1.1s; }
+      .animate-steam-3 { animation: steam 3.4s ease-in-out infinite 2.2s; }
+      .animate-marquee { animation: marquee 30s linear infinite; }
+      .animate-kenburns { animation: kenburns 22s ease-in-out infinite alternate; }
+      .animate-blob { animation: blob 14s ease-in-out infinite; }
+
+      /* Scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+      .d1 { transition-delay: 0.08s; }
+      .d2 { transition-delay: 0.16s; }
+      .d3 { transition-delay: 0.24s; }
+      .d4 { transition-delay: 0.32s; }
+
+      .grain::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.35;
+        background-image: radial-gradient(rgba(59, 36, 29, 0.14) 1px, transparent 1px);
+        background-size: 4px 4px;
+      }
+
+      ::-webkit-scrollbar { width: 10px; }
+      ::-webkit-scrollbar-track { background: #f0dfc8; }
+      ::-webkit-scrollbar-thumb { background: #6b4433; border-radius: 99px; }
+      ::-webkit-scrollbar-thumb:hover { background: #3b241d; }
+    </style>
+  </head>
+  <body class="bg-almond-50 text-coffee-800">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scrollProgress" class="fixed top-0 left-0 z-[60] h-1 bg-gradient-to-r from-almond-400 via-coffee-400 to-coffee-700 transition-[width] duration-100" style="width: 0%;"></div>
+
+    <!-- Top Navbar -->
+    <header id="navbar" class="fixed inset-x-0 top-0 z-50 bg-gradient-to-b from-coffee-900/70 to-transparent transition-all duration-500">
+      <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        <a href="#top" class="group flex items-center gap-3">
+          <span id="logoIcon" class="grid h-11 w-11 place-items-center rounded-2xl bg-almond-100 text-coffee-800 transition-all duration-500 group-hover:rotate-6 shadow-md">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z" />
+              <path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17" />
+              <path d="M7 3.5c0 1 .8 1.2.8 2M11 3.5c0 1 .8 1.2.8 2" />
+            </svg>
+          </span>
+          <span class="leading-none">
+            <span id="logoText" class="block font-display text-xl font-semibold tracking-tight text-almond-50 transition-colors">
+              KP <span class="text-almond-400">Cafe</span>
+            </span>
+            <span id="logoSub" class="mt-1 block text-[10px] font-medium uppercase tracking-[0.3em] text-almond-200/80 transition-colors">
+              Roasters · Lahore
+            </span>
+          </span>
+        </a>
+
+        <!-- Desktop Links -->
+        <ul class="hidden items-center gap-1 lg:flex">
+          <li><a href="#welcome" class="nav-link rounded-full px-4 py-2 text-sm font-medium text-almond-100/90 transition-colors hover:text-white">Welcome</a></li>
+          <li><a href="#order" class="nav-link rounded-full px-4 py-2 text-sm font-medium text-almond-100/90 transition-colors hover:text-white">Order</a></li>
+          <li><a href="#beans" class="nav-link rounded-full px-4 py-2 text-sm font-medium text-almond-100/90 transition-colors hover:text-white">Coffee Bags</a></li>
+          <li><a href="#gallery" class="nav-link rounded-full px-4 py-2 text-sm font-medium text-almond-100/90 transition-colors hover:text-white">Gallery</a></li>
+          <li><a href="#reviews" class="nav-link rounded-full px-4 py-2 text-sm font-medium text-almond-100/90 transition-colors hover:text-white">Reviews</a></li>
+          <li><a href="#visit" class="nav-link rounded-full px-4 py-2 text-sm font-medium text-almond-100/90 transition-colors hover:text-white">Visit</a></li>
+        </ul>
+
+        <!-- Right Side Icons & CTA -->
+        <div class="flex items-center gap-3">
+          <!-- Socials -->
+          <div class="hidden items-center gap-1.5 xl:flex">
+            <!-- WhatsApp -->
+            <a href="https://wa.me/923004765233" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-btn grid h-9 w-9 place-items-center rounded-full bg-white/10 text-almond-100 ring-1 ring-white/20 transition-all hover:bg-[#25D366] hover:text-white hover:-translate-y-0.5">
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 32 32">
+                <path d="M16.04 4C9.96 4 5.02 8.94 5.02 15.02c0 1.98.53 3.9 1.53 5.6L4.5 28l7.55-1.98a11 11 0 0 0 3.99.74h.01c6.08 0 11.02-4.94 11.02-11.02C27.07 8.94 22.12 4 16.04 4Zm0 20.15c-1.32 0-2.62-.36-3.76-1.03l-.27-.16-4.48 1.18 1.2-4.37-.17-.28a8.98 8.98 0 0 1-1.37-4.79c0-4.98 4.05-9.03 9.03-9.03 2.41 0 4.68.94 6.38 2.65a8.96 8.96 0 0 1 2.64 6.38c0 4.98-4.05 9.03-9.03 9.03Zm4.94-6.77c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.13-.18.28-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.72-1.34-1.6-1.5-1.88-.15-.27-.02-.42.12-.56.12-.12.27-.32.4-.48.14-.16.18-.27.27-.46.09-.18.05-.34-.02-.48-.07-.13-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47l-.52-.01c-.18 0-.47.07-.72.34-.25.28-.95.93-.95 2.26 0 1.33.97 2.62 1.11 2.8.14.18 1.9 2.9 4.6 4.07.64.28 1.14.44 1.53.57.64.2 1.22.18 1.68.11.51-.08 1.6-.65 1.82-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32Z"/>
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="https://instagram.com/kpcafe" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-btn grid h-9 w-9 place-items-center rounded-full bg-white/10 text-almond-100 ring-1 ring-white/20 transition-all hover:bg-gradient-to-tr hover:from-amber-500 hover:to-fuchsia-600 hover:text-white hover:-translate-y-0.5">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+            <!-- Facebook -->
+            <a href="https://facebook.com/kpcafe" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-btn grid h-9 w-9 place-items-center rounded-full bg-white/10 text-almond-100 ring-1 ring-white/20 transition-all hover:bg-[#1877F2] hover:text-white hover:-translate-y-0.5">
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                <path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6A21 21 0 0 0 14.3 3.5c-2.4 0-4 1.45-4 4.12V9.9H7.6V13h2.7v8h3.2Z" />
+              </svg>
+            </a>
+            <!-- TikTok -->
+            <a href="https://tiktok.com/@kpcafe" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="social-btn grid h-9 w-9 place-items-center rounded-full bg-white/10 text-almond-100 ring-1 ring-white/20 transition-all hover:bg-black hover:text-white hover:-translate-y-0.5">
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+                <path d="M16.5 3c.3 2.1 1.6 3.4 3.7 3.6v2.5c-1.3.1-2.5-.3-3.7-1.1v5.7A5.42 5.42 0 0 1 11 19a5.5 5.5 0 0 1-2.9-10.2v2.7a2.8 2.8 0 1 0 2 2.7V3h6.4Z" />
+              </svg>
+            </a>
+          </div>
+
+          <a href="#order" class="hidden rounded-full bg-coffee-700 px-5 py-2.5 text-sm font-semibold text-almond-50 transition-all hover:bg-coffee-800 hover:shadow-lg sm:block">Order ahead</a>
+
+          <!-- Mobile Hamburger Button -->
+          <button id="menuBtn" type="button" aria-label="Toggle mobile menu" class="grid h-11 w-11 place-items-center rounded-xl bg-white/15 text-white backdrop-blur transition-colors lg:hidden">
+            <svg id="hamburgerIcon" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="closeIcon" class="hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Mobile Drawer Overlay -->
+    <div id="drawerOverlay" class="fixed inset-0 z-40 bg-coffee-900/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"></div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileDrawer" class="fixed inset-y-0 right-0 z-40 w-[84%] max-w-sm bg-almond-50 shadow-2xl translate-x-full transition-transform duration-500 lg:hidden">
+      <div class="flex h-full flex-col px-6 py-8">
+        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-coffee-500">Navigation</p>
+        <ul class="mt-6 space-y-1">
+          <li><a href="#welcome" class="mobile-link flex items-center justify-between border-b border-coffee-200/60 py-4 font-display text-2xl text-coffee-800 hover:text-almond-500">Welcome <span class="text-sm text-coffee-400">01</span></a></li>
+          <li><a href="#order" class="mobile-link flex items-center justify-between border-b border-coffee-200/60 py-4 font-display text-2xl text-coffee-800 hover:text-almond-500">Order <span class="text-sm text-coffee-400">02</span></a></li>
+          <li><a href="#beans" class="mobile-link flex items-center justify-between border-b border-coffee-200/60 py-4 font-display text-2xl text-coffee-800 hover:text-almond-500">Coffee Bags <span class="text-sm text-coffee-400">03</span></a></li>
+          <li><a href="#gallery" class="mobile-link flex items-center justify-between border-b border-coffee-200/60 py-4 font-display text-2xl text-coffee-800 hover:text-almond-500">Gallery <span class="text-sm text-coffee-400">04</span></a></li>
+          <li><a href="#reviews" class="mobile-link flex items-center justify-between border-b border-coffee-200/60 py-4 font-display text-2xl text-coffee-800 hover:text-almond-500">Reviews <span class="text-sm text-coffee-400">05</span></a></li>
+          <li><a href="#visit" class="mobile-link flex items-center justify-between border-b border-coffee-200/60 py-4 font-display text-2xl text-coffee-800 hover:text-almond-500">Visit <span class="text-sm text-coffee-400">06</span></a></li>
+        </ul>
+
+        <div class="mt-auto space-y-5 pt-8">
+          <a href="#order" class="mobile-link block rounded-full bg-coffee-700 py-3.5 text-center text-sm font-semibold text-almond-50 shadow-lg">Order pickup or delivery</a>
+          <div class="flex justify-center gap-3">
+            <a href="https://wa.me/923004765233" target="_blank" class="grid h-11 w-11 place-items-center rounded-full bg-[#25D366] text-white"><svg class="h-5 w-5 fill-current" viewBox="0 0 32 32"><path d="M16.04 4C9.96 4 5.02 8.94 5.02 15.02c0 1.98.53 3.9 1.53 5.6L4.5 28l7.55-1.98a11 11 0 0 0 3.99.74h.01c6.08 0 11.02-4.94 11.02-11.02C27.07 8.94 22.12 4 16.04 4Zm0 20.15c-1.32 0-2.62-.36-3.76-1.03l-.27-.16-4.48 1.18 1.2-4.37-.17-.28a8.98 8.98 0 0 1-1.37-4.79c0-4.98 4.05-9.03 9.03-9.03 2.41 0 4.68.94 6.38 2.65a8.96 8.96 0 0 1 2.64 6.38c0 4.98-4.05 9.03-9.03 9.03Z"/></svg></a>
+            <a href="https://instagram.com/kpcafe" target="_blank" class="grid h-11 w-11 place-items-center rounded-full bg-coffee-700 text-almond-100"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></a>
+            <a href="https://facebook.com/kpcafe" target="_blank" class="grid h-11 w-11 place-items-center rounded-full bg-coffee-700 text-almond-100"><svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6A21 21 0 0 0 14.3 3.5c-2.4 0-4 1.45-4 4.12V9.9H7.6V13h2.7v8h3.2Z"/></svg></a>
+            <a href="https://tiktok.com/@kpcafe" target="_blank" class="grid h-11 w-11 place-items-center rounded-full bg-coffee-700 text-almond-100"><svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M16.5 3c.3 2.1 1.6 3.4 3.7 3.6v2.5c-1.3.1-2.5-.3-3.7-1.1v5.7A5.42 5.42 0 0 1 11 19a5.5 5.5 0 0 1-2.9-10.2v2.7a2.8 2.8 0 1 0 2 2.7V3h6.4Z"/></svg></a>
+          </div>
+          <p class="text-center text-xs text-coffee-500">142-B MM Alam Road, Gulberg III, Lahore</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="top" class="relative overflow-hidden bg-coffee-900">
+      <!-- Background with Kenburns Effect -->
+      <div class="absolute inset-0">
+        <img
+          src="https://images.pexels.com/photos/36407802/pexels-photo-36407802.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1800&h=1200"
+          alt="KP Cafe storefront decorated with plants"
+          class="h-full w-full object-cover object-center animate-kenburns"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-coffee-900/90 via-coffee-900/70 to-coffee-900/35"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-coffee-900 via-transparent to-coffee-900/60"></div>
+      </div>
+
+      <!-- Glowing blobs -->
+      <div class="pointer-events-none absolute -top-24 -right-16 h-72 w-72 animate-blob bg-almond-300/20 blur-2xl"></div>
+      <div class="pointer-events-none absolute top-1/2 -left-24 h-80 w-80 animate-float-slow bg-coffee-400/20 blur-3xl"></div>
+
+      <div class="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-4 pt-28 pb-16 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <!-- Rating badge -->
+          <div class="reveal mb-6 inline-flex items-center gap-3 rounded-full border border-almond-200/25 bg-white/10 px-4 py-2 backdrop-blur-md">
+            <span class="flex items-center gap-1.5">
+              <svg class="h-4 w-4 text-almond-300 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+              <strong class="text-sm font-semibold text-almond-50">4.8 ★</strong>
+            </span>
+            <span class="h-4 w-px bg-almond-200/30"></span>
+            <span class="text-sm text-almond-100/90">1,200+ reviews</span>
+          </div>
+
+          <p class="reveal d1 mb-4 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.32em] text-almond-300">
+            <span class="h-px w-10 bg-almond-300/70"></span>
+            Welcome to KP Cafe
+          </p>
+
+          <h1 class="reveal d2 font-display text-4xl leading-[1.08] font-semibold text-almond-50 sm:text-6xl lg:text-7xl">
+            Your cozy coffee stop in <span class="relative inline-block text-almond-300">Gulberg<svg viewBox="0 0 300 12" class="absolute -bottom-2 left-0 h-3 w-full text-almond-400/70" preserveAspectRatio="none"><path d="M2 8c60-6 120-6 180-3s80 2 116-2" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></span>.
+          </h1>
+
+          <p class="reveal d3 mt-8 max-w-xl text-base leading-relaxed text-almond-100/85 sm:text-lg">
+            Come in for a proper coffee break, a fresh pastry, a warm crepe, a bagel, or a calm moment before the rest of your day. Dine in, take away, order ahead — or bring the KP Cafe taste home with our roasted coffee bags.
+          </p>
+
+          <div class="reveal d4 mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a href="#order" class="group inline-flex items-center justify-center gap-2 rounded-full bg-almond-200 px-7 py-3.5 text-sm font-semibold text-coffee-800 transition-all duration-300 hover:bg-almond-100 hover:shadow-xl hover:shadow-almond-200/20">
+              <svg class="h-4 w-4 transition-transform group-hover:-rotate-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M7 3.5c0 1 .8 1.2.8 2M11 3.5c0 1 .8 1.2.8 2"/></svg>
+              Order pickup or delivery
+            </a>
+            <a href="#gallery" class="inline-flex items-center justify-center gap-2 rounded-full border border-almond-200/40 px-7 py-3.5 text-sm font-semibold text-almond-50 transition-all duration-300 hover:bg-white/10">
+              See the cafe
+            </a>
+          </div>
+
+          <div class="reveal d4 mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-almond-100/80">
+            <svg class="h-4 w-4 text-almond-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>142-B MM Alam Road, Gulberg III, Lahore</span>
+            <span class="hidden h-4 w-px bg-almond-200/30 sm:block"></span>
+            <span class="font-medium text-almond-200">Open today · 8:00 AM – 11:00 PM</span>
+          </div>
+        </div>
+
+        <!-- Floating Card (Steam Animation) -->
+        <div class="reveal mt-14 hidden self-end rounded-3xl border border-white/15 bg-white/10 p-5 backdrop-blur-md md:block">
+          <div class="flex items-center gap-4">
+            <div class="relative grid h-14 w-14 place-items-center rounded-full bg-almond-200/90 shadow-md">
+              <svg class="h-7 w-7 text-coffee-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/></svg>
+              <!-- Animated Steam Lines -->
+              <span class="absolute -top-6 left-3 h-6 w-1.5 rounded-full bg-white/40 blur-[2px] animate-steam-1"></span>
+              <span class="absolute -top-6 left-6 h-6 w-1.5 rounded-full bg-white/30 blur-[2px] animate-steam-2"></span>
+              <span class="absolute -top-6 left-9 h-6 w-1.5 rounded-full bg-white/25 blur-[2px] animate-steam-3"></span>
+            </div>
+            <div>
+              <p class="font-display text-lg text-almond-50">Fresh cup, 3 min average</p>
+              <p class="text-xs text-almond-100/70">Order ahead on WhatsApp and skip the queue</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Counter -->
+        <div class="mt-12 grid grid-cols-2 gap-6 rounded-3xl border border-white/10 bg-white/5 px-6 py-6 backdrop-blur-md sm:grid-cols-4">
+          <div class="reveal"><p class="font-display text-2xl font-semibold text-almond-100 sm:text-3xl">4.8</p><p class="mt-1 text-xs uppercase tracking-[0.18em] text-almond-300/80">Average rating</p></div>
+          <div class="reveal d1"><p class="font-display text-2xl font-semibold text-almond-100 sm:text-3xl">1,200+</p><p class="mt-1 text-xs uppercase tracking-[0.18em] text-almond-300/80">Happy reviews</p></div>
+          <div class="reveal d2"><p class="font-display text-2xl font-semibold text-almond-100 sm:text-3xl">18</p><p class="mt-1 text-xs uppercase tracking-[0.18em] text-almond-300/80">Single origin roasts</p></div>
+          <div class="reveal d3"><p class="font-display text-2xl font-semibold text-almond-100 sm:text-3xl">9 yrs</p><p class="mt-1 text-xs uppercase tracking-[0.18em] text-almond-300/80">Neighbourhood cafe</p></div>
+        </div>
+      </div>
+
+      <!-- Infinite Marquee -->
+      <div class="relative overflow-hidden border-t border-white/10 bg-coffee-900/80 py-3 backdrop-blur">
+        <div class="flex w-max animate-marquee gap-8 whitespace-nowrap">
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Espresso <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Cold Brew <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Fresh Pastries <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Warm Crepes <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Bagels <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Roasted Beans <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Dine In <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Take Away <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Order Ahead <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <!-- Duplicate for seamless loop -->
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Espresso <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Cold Brew <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Fresh Pastries <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Warm Crepes <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Bagels <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Roasted Beans <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Dine In <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Take Away <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+          <span class="flex items-center gap-8 text-sm text-almond-200/80">Order Ahead <span class="h-1.5 w-1.5 rounded-full bg-almond-400/70"></span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WELCOME SECTION -->
+    <section id="welcome" class="relative bg-almond-50 py-20 sm:py-28">
+      <div class="pointer-events-none absolute top-10 left-0 h-64 w-64 animate-float-slow rounded-full bg-almond-200/50 blur-3xl"></div>
+      <div class="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:px-8">
+        <!-- Collage -->
+        <div class="reveal relative order-2 lg:order-1">
+          <div class="relative overflow-hidden rounded-[2rem] shadow-2xl shadow-coffee-900/20">
+            <img
+              src="https://images.pexels.com/photos/34386522/pexels-photo-34386522.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=1400"
+              alt="Warm cozy interior of KP Cafe"
+              class="h-[26rem] w-full object-cover sm:h-[32rem]"
+              loading="lazy"
+            />
+          </div>
+          <div class="absolute -bottom-10 -left-4 hidden w-48 overflow-hidden rounded-2xl border-4 border-almond-50 shadow-xl shadow-coffee-900/20 sm:block animate-float">
+            <img
+              src="https://images.pexels.com/photos/31139336/pexels-photo-31139336.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=600&h=800"
+              alt="Cappuccino with heart latte art"
+              class="h-56 w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="absolute -top-8 -right-3 hidden w-40 overflow-hidden rounded-2xl border-4 border-almond-50 shadow-xl shadow-coffee-900/20 sm:block animate-float-slow">
+            <img
+              src="https://images.pexels.com/photos/22679454/pexels-photo-22679454.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=600&h=700"
+              alt="Roasted coffee beans"
+              class="h-44 w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div class="absolute -bottom-6 right-2 hidden rounded-2xl bg-coffee-700 px-5 py-4 text-almond-50 shadow-xl shadow-coffee-900/30 md:block">
+            <p class="font-display text-2xl">Since 2017</p>
+            <p class="text-xs text-almond-200/80">Brewing on MM Alam Road</p>
+          </div>
+        </div>
+
+        <!-- Copy -->
+        <div class="reveal order-1 lg:order-2">
+          <div class="flex items-center gap-3">
+            <span class="h-px w-10 bg-coffee-400/60"></span>
+            <span class="text-xs font-semibold uppercase tracking-[0.28em] text-coffee-500">Welcome</span>
+          </div>
+          <h2 class="mt-4 font-display text-3xl font-semibold sm:text-4xl lg:text-5xl text-coffee-800">
+            A small cafe with a very warm heart.
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-coffee-700/85 sm:text-lg">
+            Come in for a proper coffee break, a fresh pastry, a warm crepe, a bagel, or a calm moment before the rest of your day. Everything is made to order, and the kettle is always on.
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-coffee-700/80">
+            You can dine in, take away, order ahead, or bring the KP Cafe taste home with roasted coffee bags from our online store. Our baristas grind to order and will happily help you pick a roast that suits your mornings.
+          </p>
+
+          <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div class="group">
+              <span class="grid h-12 w-12 place-items-center rounded-2xl bg-almond-200 text-coffee-700 transition-all duration-300 group-hover:bg-coffee-700 group-hover:text-almond-100">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/></svg>
+              </span>
+              <h3 class="mt-4 font-display text-lg font-semibold text-coffee-800">Dine in</h3>
+              <p class="mt-1 text-sm leading-relaxed text-coffee-700/75">Slow corners, warm light and outlets at every table.</p>
+            </div>
+            <div class="group">
+              <span class="grid h-12 w-12 place-items-center rounded-2xl bg-almond-200 text-coffee-700 transition-all duration-300 group-hover:bg-coffee-700 group-hover:text-almond-100">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 7h12l1 13H5L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+              </span>
+              <h3 class="mt-4 font-display text-lg font-semibold text-coffee-800">Take away</h3>
+              <p class="mt-1 text-sm leading-relaxed text-coffee-700/75">Ready in 3 minutes — call ahead and skip the queue.</p>
+            </div>
+            <div class="group">
+              <span class="grid h-12 w-12 place-items-center rounded-2xl bg-almond-200 text-coffee-700 transition-all duration-300 group-hover:bg-coffee-700 group-hover:text-almond-100">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg>
+              </span>
+              <h3 class="mt-4 font-display text-lg font-semibold text-coffee-800">Order ahead</h3>
+              <p class="mt-1 text-sm leading-relaxed text-coffee-700/75">Pickup or delivery in a few taps, straight from your phone.</p>
+            </div>
+            <div class="group">
+              <span class="grid h-12 w-12 place-items-center rounded-2xl bg-almond-200 text-coffee-700 transition-all duration-300 group-hover:bg-coffee-700 group-hover:text-almond-100">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 4C10 4 4 9 4 17c0 1.2.2 2.2.4 3"/><path d="M20 4c0 9-5.5 13-12 13-1.5 0-2.6-.2-3.6-.6C6 10 12 5 20 4Z"/></svg>
+              </span>
+              <h3 class="mt-4 font-display text-lg font-semibold text-coffee-800">Roasted fresh</h3>
+              <p class="mt-1 text-sm leading-relaxed text-coffee-700/75">Small batch beans roasted every week, never sitting stale.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDER SECTION -->
+    <section id="order" class="grain relative overflow-hidden bg-coffee-800 py-20 sm:py-28">
+      <div class="pointer-events-none absolute -top-20 right-0 h-80 w-80 animate-blob bg-coffee-500/30 blur-3xl"></div>
+      <div class="pointer-events-none absolute bottom-0 left-0 h-72 w-72 animate-float-slow bg-almond-400/10 blur-3xl"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal">
+          <div class="flex items-center gap-3">
+            <span class="h-px w-10 bg-almond-300/60"></span>
+            <span class="text-xs font-semibold uppercase tracking-[0.28em] text-almond-200">Order</span>
+          </div>
+          <h2 class="mt-4 font-display text-3xl font-semibold sm:text-4xl lg:text-5xl text-almond-50">
+            Order pickup or delivery in a few taps.
+          </h2>
+          <p class="mt-4 max-w-2xl text-base leading-relaxed text-almond-100/85 sm:text-lg">
+            Open the order page, choose pickup or delivery, then select the option that works best for you. We pack everything fresh and keep it hot.
+          </p>
+        </div>
+
+        <!-- 3 Steps -->
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          <div class="reveal rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-almond-300/40">
+            <span class="font-display text-3xl text-almond-400/80">01</span>
+            <h3 class="mt-3 font-display text-xl text-almond-50">Open the order page</h3>
+            <p class="mt-2 text-sm text-almond-100/70">Tap a button below — WhatsApp opens with our cafe.</p>
+          </div>
+          <div class="reveal d1 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-almond-300/40">
+            <span class="font-display text-3xl text-almond-400/80">02</span>
+            <h3 class="mt-3 font-display text-xl text-almond-50">Choose pickup or delivery</h3>
+            <p class="mt-2 text-sm text-almond-100/70">Tell us your items and where you are.</p>
+          </div>
+          <div class="reveal d2 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-almond-300/40">
+            <span class="font-display text-3xl text-almond-400/80">03</span>
+            <h3 class="mt-3 font-display text-xl text-almond-50">We confirm in minutes</h3>
+            <p class="mt-2 text-sm text-almond-100/70">Pay on pickup, or cash/EasyPaisa on delivery.</p>
+          </div>
+        </div>
+
+        <!-- Pickup / Delivery Cards -->
+        <div class="mt-8 grid gap-6 lg:grid-cols-2">
+          <!-- Pickup -->
+          <a href="https://wa.me/923004765233?text=Hi%20KP%20Cafe!%20I'd%20like%20to%20place%20a%20PICKUP%20order." target="_blank" rel="noopener noreferrer" class="reveal group relative overflow-hidden rounded-[2rem] bg-almond-100 p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-coffee-900/40">
+            <span class="grid h-14 w-14 place-items-center rounded-2xl bg-coffee-700 text-almond-100">
+              <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 7h12l1 13H5L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </span>
+            <h3 class="mt-6 font-display text-3xl text-coffee-800">Pickup</h3>
+            <p class="mt-2 max-w-sm text-sm leading-relaxed text-coffee-700/80">
+              Order ahead and it will be waiting on the counter, hot and labelled with your name. Ready in 5–8 minutes.
+            </p>
+            <span class="mt-6 inline-flex items-center gap-2 rounded-full bg-coffee-700 px-5 py-2.5 text-sm font-semibold text-almond-50 transition-colors group-hover:bg-coffee-900">
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 32 32"><path d="M16.04 4C9.96 4 5.02 8.94 5.02 15.02c0 1.98.53 3.9 1.53 5.6L4.5 28l7.55-1.98a11 11 0 0 0 3.99.74h.01c6.08 0 11.02-4.94 11.02-11.02C27.07 8.94 22.12 4 16.04 4Z"/></svg>
+              Order pickup
+            </span>
+          </a>
+
+          <!-- Delivery -->
+          <a href="https://wa.me/923004765233?text=Hi%20KP%20Cafe!%20I'd%20like%20a%20DELIVERY%20order." target="_blank" rel="noopener noreferrer" class="reveal d1 group relative overflow-hidden rounded-[2rem] bg-coffee-900 p-8 ring-1 ring-white/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-coffee-900/40">
+            <span class="grid h-14 w-14 place-items-center rounded-2xl bg-almond-200 text-coffee-800">
+              <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <h3 class="mt-6 font-display text-3xl text-almond-50">Delivery</h3>
+            <p class="mt-2 max-w-sm text-sm leading-relaxed text-almond-100/70">
+              We deliver within 5 km of Gulberg III — Gulberg, DHA Phase 1, Model Town and Garden Town. Free delivery over Rs 2,000.
+            </p>
+            <span class="mt-6 inline-flex items-center gap-2 rounded-full bg-almond-200 px-5 py-2.5 text-sm font-semibold text-coffee-800 transition-colors group-hover:bg-white">
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 32 32"><path d="M16.04 4C9.96 4 5.02 8.94 5.02 15.02c0 1.98.53 3.9 1.53 5.6L4.5 28l7.55-1.98a11 11 0 0 0 3.99.74h.01c6.08 0 11.02-4.94 11.02-11.02C27.07 8.94 22.12 4 16.04 4Z"/></svg>
+              Order delivery
+            </span>
+          </a>
+        </div>
+
+        <!-- Menu Highlights -->
+        <div class="mt-16">
+          <div class="reveal flex flex-wrap items-end justify-between gap-4">
+            <h3 class="font-display text-2xl text-almond-50 sm:text-3xl">A few things our regulars love</h3>
+            <p class="text-sm text-almond-200/70">Full menu available in store</p>
+          </div>
+          <div class="mt-8 grid gap-x-10 gap-y-2 sm:grid-cols-2">
+            <div class="reveal flex items-center justify-between gap-4 border-b border-white/10 py-4"><div class="flex items-start gap-3"><svg class="mt-1 h-5 w-5 shrink-0 text-almond-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/></svg><div><p class="font-medium text-almond-50">KP Signature Latte</p><p class="text-xs text-almond-100/60">Double shot, velvet milk, almond cream</p></div></div><p class="shrink-0 font-display text-lg text-almond-300">Rs 850</p></div>
+            <div class="reveal d1 flex items-center justify-between gap-4 border-b border-white/10 py-4"><div class="flex items-start gap-3"><svg class="mt-1 h-5 w-5 shrink-0 text-almond-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/></svg><div><p class="font-medium text-almond-50">Honey Cinnamon Cappuccino</p><p class="text-xs text-almond-100/60">Foamy, warm spice, local honey</p></div></div><p class="shrink-0 font-display text-lg text-almond-300">Rs 780</p></div>
+            <div class="reveal d2 flex items-center justify-between gap-4 border-b border-white/10 py-4"><div class="flex items-start gap-3"><svg class="mt-1 h-5 w-5 shrink-0 text-almond-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/></svg><div><p class="font-medium text-almond-50">Butter Croissant</p><p class="text-xs text-almond-100/60">Baked every morning at 7 AM</p></div></div><p class="shrink-0 font-display text-lg text-almond-300">Rs 520</p></div>
+            <div class="reveal d3 flex items-center justify-between gap-4 border-b border-white/10 py-4"><div class="flex items-start gap-3"><svg class="mt-1 h-5 w-5 shrink-0 text-almond-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/></svg><div><p class="font-medium text-almond-50">Nutella Crepe</p><p class="text-xs text-almond-100/60">Warm crepe, hazelnut spread, banana</p></div></div><p class="shrink-0 font-display text-lg text-almond-300">Rs 950</p></div>
+            <div class="reveal d4 flex items-center justify-between gap-4 border-b border-white/10 py-4"><div class="flex items-start gap-3"><svg class="mt-1 h-5 w-5 shrink-0 text-almond-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/></svg><div><p class="font-medium text-almond-50">Everything Bagel</p><p class="text-xs text-almond-100/60">Cream cheese, chives, smoked olive oil</p></div></div><p class="shrink-0 font-display text-lg text-almond-300">Rs 690</p></div>
+            <div class="reveal flex items-center justify-between gap-4 border-b border-white/10 py-4"><div class="flex items-start gap-3"><svg class="mt-1 h-5 w-5 shrink-0 text-almond-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/></svg><div><p class="font-medium text-almond-50">Cold Brew Almond</p><p class="text-xs text-almond-100/60">18 hour steep, oat + almond foam</p></div></div><p class="shrink-0 font-display text-lg text-almond-300">Rs 890</p></div>
+          </div>
+          <div class="reveal mt-8 flex flex-wrap items-center gap-4 text-sm text-almond-100/70">
+            <svg class="h-5 w-5 text-almond-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg>
+            <span>Kitchen closes 30 minutes before the cafe.</span>
+            <a href="tel:+923004765233" class="font-semibold text-almond-200 underline decoration-almond-400 underline-offset-4">+92 300 476 5233</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COFFEE BAGS SECTION -->
+    <section id="beans" class="relative overflow-hidden bg-almond-100 py-20 sm:py-28">
+      <div class="pointer-events-none absolute -left-24 top-1/3 h-72 w-72 animate-float-slow rounded-full bg-almond-300/50 blur-3xl"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div class="reveal">
+            <div class="flex items-center gap-3">
+              <span class="h-px w-10 bg-coffee-400/60"></span>
+              <span class="text-xs font-semibold uppercase tracking-[0.28em] text-coffee-500">Coffee bags</span>
+            </div>
+            <h2 class="mt-4 font-display text-3xl font-semibold sm:text-4xl lg:text-5xl text-coffee-800">
+              Bring KP Cafe home.
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-coffee-700/85 sm:text-lg">
+              Choose from Almond Cream, Midnight Espresso and Sunrise Original blends — roasted in small batches, packed the same week and ready to order online.
+            </p>
+          </div>
+          <div class="reveal d1 grid grid-cols-3 gap-4 rounded-3xl bg-almond-50 p-5 shadow-lg shadow-coffee-900/5">
+            <div class="text-center"><p class="font-display text-3xl text-coffee-700">3</p><p class="mt-1 text-[11px] uppercase tracking-[0.16em] text-coffee-500">250g bags</p></div>
+            <div class="text-center"><p class="font-display text-3xl text-coffee-700">Any</p><p class="mt-1 text-[11px] uppercase tracking-[0.16em] text-coffee-500">Free grinding</p></div>
+            <div class="text-center"><p class="font-display text-3xl text-coffee-700">2–4</p><p class="mt-1 text-[11px] uppercase tracking-[0.16em] text-coffee-500">Nationwide</p></div>
+          </div>
+        </div>
+
+        <!-- Bags Grid -->
+        <div class="mt-14 grid gap-8 md:grid-cols-3">
+          <!-- Bag 1 -->
+          <article class="reveal group flex flex-col overflow-hidden rounded-[2rem] bg-almond-50 shadow-lg shadow-coffee-900/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+            <div class="relative h-72 overflow-hidden">
+              <img src="https://images.pexels.com/photos/22679454/pexels-photo-22679454.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=1400" alt="Almond Cream Blend" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+              <span class="absolute top-4 left-4 rounded-full bg-coffee-800/85 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-almond-100 backdrop-blur">Best seller</span>
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <div class="flex gap-0.5 text-almond-400">
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+              </div>
+              <h3 class="mt-3 font-display text-2xl text-coffee-800">Almond Cream Blend</h3>
+              <p class="mt-1 text-xs uppercase tracking-[0.14em] text-coffee-500">Medium roast · Brazil + Ethiopia</p>
+              <p class="mt-3 text-sm leading-relaxed text-coffee-700/80">Toasted almond, milk chocolate, caramel notes.</p>
+              <div class="mt-6 flex items-center justify-between border-t border-coffee-200/70 pt-5">
+                <div><p class="font-display text-xl text-coffee-800">Rs 2,450</p><p class="text-xs text-coffee-500">250 g bag</p></div>
+                <a href="https://wa.me/923004765233?text=Hi%20KP%20Cafe!%20I'd%20like%20to%20order%20the%20Almond%20Cream%20Blend." target="_blank" class="inline-flex items-center gap-2 rounded-full bg-coffee-700 px-4 py-2.5 text-sm font-semibold text-almond-50 transition-all hover:bg-coffee-900">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l1 13H5L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+                  Order
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Bag 2 -->
+          <article class="reveal d1 group flex flex-col overflow-hidden rounded-[2rem] bg-almond-50 shadow-lg shadow-coffee-900/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+            <div class="relative h-72 overflow-hidden">
+              <img src="https://images.pexels.com/photos/9334456/pexels-photo-9334456.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=1400" alt="Midnight Espresso" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+              <span class="absolute top-4 left-4 rounded-full bg-coffee-800/85 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-almond-100 backdrop-blur">Strong</span>
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <div class="flex gap-0.5 text-almond-400">
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+              </div>
+              <h3 class="mt-3 font-display text-2xl text-coffee-800">Midnight Espresso</h3>
+              <p class="mt-1 text-xs uppercase tracking-[0.14em] text-coffee-500">Dark roast · Sumatra + Colombia</p>
+              <p class="mt-3 text-sm leading-relaxed text-coffee-700/80">Dark cocoa, molasses, toasted spice finish.</p>
+              <div class="mt-6 flex items-center justify-between border-t border-coffee-200/70 pt-5">
+                <div><p class="font-display text-xl text-coffee-800">Rs 2,750</p><p class="text-xs text-coffee-500">250 g bag</p></div>
+                <a href="https://wa.me/923004765233?text=Hi%20KP%20Cafe!%20I'd%20like%20to%20order%20the%20Midnight%20Espresso." target="_blank" class="inline-flex items-center gap-2 rounded-full bg-coffee-700 px-4 py-2.5 text-sm font-semibold text-almond-50 transition-all hover:bg-coffee-900">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l1 13H5L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+                  Order
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Bag 3 -->
+          <article class="reveal d2 group flex flex-col overflow-hidden rounded-[2rem] bg-almond-50 shadow-lg shadow-coffee-900/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+            <div class="relative h-72 overflow-hidden">
+              <img src="https://images.pexels.com/photos/29317659/pexels-photo-29317659.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=1400" alt="Sunrise Original" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+              <span class="absolute top-4 left-4 rounded-full bg-coffee-800/85 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-almond-100 backdrop-blur">Fruity</span>
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <div class="flex gap-0.5 text-almond-400">
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+              </div>
+              <h3 class="mt-3 font-display text-2xl text-coffee-800">Sunrise Original</h3>
+              <p class="mt-1 text-xs uppercase tracking-[0.14em] text-coffee-500">Light roast · Kenya + Guatemala</p>
+              <p class="mt-3 text-sm leading-relaxed text-coffee-700/80">Red berry, citrus bloom, floral honey.</p>
+              <div class="mt-6 flex items-center justify-between border-t border-coffee-200/70 pt-5">
+                <div><p class="font-display text-xl text-coffee-800">Rs 2,600</p><p class="text-xs text-coffee-500">250 g bag</p></div>
+                <a href="https://wa.me/923004765233?text=Hi%20KP%20Cafe!%20I'd%20like%20to%20order%20the%20Sunrise%20Original." target="_blank" class="inline-flex items-center gap-2 rounded-full bg-coffee-700 px-4 py-2.5 text-sm font-semibold text-almond-50 transition-all hover:bg-coffee-900">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l1 13H5L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+                  Order
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Help Banner -->
+        <div class="reveal mt-14 overflow-hidden rounded-[2rem] bg-coffee-800">
+          <div class="grid items-center gap-8 p-8 sm:p-10 lg:grid-cols-2">
+            <div>
+              <h3 class="font-display text-3xl text-almond-50 sm:text-4xl">Not sure which roast is yours?</h3>
+              <p class="mt-4 text-sm leading-relaxed text-almond-100/75">
+                Tell us how you brew at home — French press, moka pot, espresso machine — and we will match you with the right grind and roast, then ship it anywhere in Pakistan.
+              </p>
+              <div class="mt-7 flex flex-wrap gap-3">
+                <a href="https://wa.me/923004765233?text=Hi%20KP%20Cafe!%20Help%20me%20choose%20a%20coffee%20bag." target="_blank" class="inline-flex items-center gap-2 rounded-full bg-almond-200 px-6 py-3 text-sm font-semibold text-coffee-800 transition-colors hover:bg-white">
+                  <svg class="h-4 w-4 fill-current" viewBox="0 0 32 32"><path d="M16.04 4C9.96 4 5.02 8.94 5.02 15.02c0 1.98.53 3.9 1.53 5.6L4.5 28l7.55-1.98a11 11 0 0 0 3.99.74h.01c6.08 0 11.02-4.94 11.02-11.02C27.07 8.94 22.12 4 16.04 4Z"/></svg>
+                  Shop all coffee beans
+                </a>
+                <a href="#gallery" class="inline-flex items-center gap-2 rounded-full border border-almond-200/40 px-6 py-3 text-sm font-semibold text-almond-50 transition-colors hover:bg-white/10">See the roastery</a>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <img src="https://images.pexels.com/photos/4820654/pexels-photo-4820654.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=600&h=700" alt="Coffee bags on display" loading="lazy" class="h-40 w-full rounded-2xl object-cover sm:h-52"/>
+              <img src="https://images.pexels.com/photos/37540287/pexels-photo-37540287.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=600&h=700" alt="Barista packing coffee bags" loading="lazy" class="h-40 w-full translate-y-6 rounded-2xl object-cover sm:h-52"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="relative bg-almond-50 py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal">
+          <div class="flex items-center gap-3">
+            <span class="h-px w-10 bg-coffee-400/60"></span>
+            <span class="text-xs font-semibold uppercase tracking-[0.28em] text-coffee-500">Gallery</span>
+          </div>
+          <h2 class="mt-4 font-display text-3xl font-semibold sm:text-4xl lg:text-5xl text-coffee-800">
+            See the shop before you stop by.
+          </h2>
+          <p class="mt-4 max-w-2xl text-base leading-relaxed text-coffee-700/85 sm:text-lg">
+            A glimpse of the KP Cafe storefront, the warm local atmosphere and the coffee bags you can take home.
+          </p>
+        </div>
+
+        <div class="mt-12 grid auto-rows-[11rem] grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+          <!-- 1 -->
+          <div class="reveal group relative overflow-hidden rounded-2xl cursor-pointer lg:col-span-2 lg:row-span-2 gallery-trigger" data-img="https://images.pexels.com/photos/36407802/pexels-photo-36407802.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1800&h=1200" data-caption="KP Cafe storefront with plants and a bicycle">
+            <img src="https://images.pexels.com/photos/36407802/pexels-photo-36407802.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1800&h=1200" alt="KP Cafe storefront with plants and a bicycle" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+            <span class="absolute inset-0 bg-coffee-900/0 transition-colors duration-500 group-hover:bg-coffee-900/40"></span>
+            <span class="absolute inset-x-3 bottom-3 translate-y-3 rounded-xl bg-white/90 px-3 py-1.5 text-left text-[11px] font-medium text-coffee-800 opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">Storefront & entrance</span>
+          </div>
+
+          <!-- 2 -->
+          <div class="reveal d1 group relative overflow-hidden rounded-2xl cursor-pointer gallery-trigger" data-img="https://images.pexels.com/photos/459489/pexels-photo-459489.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1400&h=1000" data-caption="Latte with heart art in a blue cup">
+            <img src="https://images.pexels.com/photos/459489/pexels-photo-459489.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=800&h=600" alt="Latte with heart art" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+            <span class="absolute inset-0 bg-coffee-900/0 transition-colors duration-500 group-hover:bg-coffee-900/40"></span>
+            <span class="absolute inset-x-3 bottom-3 translate-y-3 rounded-xl bg-white/90 px-3 py-1.5 text-left text-[11px] font-medium text-coffee-800 opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">Latte art</span>
+          </div>
+
+          <!-- 3 -->
+          <div class="reveal d2 group relative overflow-hidden rounded-2xl cursor-pointer gallery-trigger" data-img="https://images.pexels.com/photos/11696469/pexels-photo-11696469.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1400&h=1000" data-caption="Coffee themed framed wall art">
+            <img src="https://images.pexels.com/photos/11696469/pexels-photo-11696469.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=800&h=600" alt="Coffee themed wall art" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+            <span class="absolute inset-0 bg-coffee-900/0 transition-colors duration-500 group-hover:bg-coffee-900/40"></span>
+            <span class="absolute inset-x-3 bottom-3 translate-y-3 rounded-xl bg-white/90 px-3 py-1.5 text-left text-[11px] font-medium text-coffee-800 opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">Wall gallery</span>
+          </div>
+
+          <!-- 4 -->
+          <div class="reveal d3 group relative overflow-hidden rounded-2xl cursor-pointer gallery-trigger" data-img="https://images.pexels.com/photos/31139336/pexels-photo-31139336.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=1400" data-caption="Cappuccino with heart latte art">
+            <img src="https://images.pexels.com/photos/31139336/pexels-photo-31139336.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=800&h=600" alt="Heart latte art" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+            <span class="absolute inset-0 bg-coffee-900/0 transition-colors duration-500 group-hover:bg-coffee-900/40"></span>
+            <span class="absolute inset-x-3 bottom-3 translate-y-3 rounded-xl bg-white/90 px-3 py-1.5 text-left text-[11px] font-medium text-coffee-800 opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">Cappuccino</span>
+          </div>
+
+          <!-- 5 -->
+          <div class="reveal group relative overflow-hidden rounded-2xl cursor-pointer gallery-trigger" data-img="https://images.pexels.com/photos/18721993/pexels-photo-18721993.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1400&h=1000" data-caption="Cafe interior with plants and warm lighting">
+            <img src="https://images.pexels.com/photos/18721993/pexels-photo-18721993.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=800&h=600" alt="Plants in cafe" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+            <span class="absolute inset-0 bg-coffee-900/0 transition-colors duration-500 group-hover:bg-coffee-900/40"></span>
+            <span class="absolute inset-x-3 bottom-3 translate-y-3 rounded-xl bg-white/90 px-3 py-1.5 text-left text-[11px] font-medium text-coffee-800 opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">Botanical corner</span>
+          </div>
+
+          <!-- 6 -->
+          <div class="reveal d1 group relative overflow-hidden rounded-2xl cursor-pointer gallery-trigger" data-img="https://images.pexels.com/photos/22679454/pexels-photo-22679454.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=1400" data-caption="Roasted coffee beans spilling from a bag">
+            <img src="https://images.pexels.com/photos/22679454/pexels-photo-22679454.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=800&h=600" alt="Coffee beans" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+            <span class="absolute inset-0 bg-coffee-900/0 transition-colors duration-500 group-hover:bg-coffee-900/40"></span>
+            <span class="absolute inset-x-3 bottom-3 translate-y-3 rounded-xl bg-white/90 px-3 py-1.5 text-left text-[11px] font-medium text-coffee-800 opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">Whole beans</span>
+          </div>
+
+          <!-- 7 -->
+          <div class="reveal d2 group relative overflow-hidden rounded-2xl cursor-pointer lg:col-span-2 gallery-trigger" data-img="https://images.pexels.com/photos/18150815/pexels-photo-18150815.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900" data-caption="Guests enjoying the cafe at night">
+            <img src="https://images.pexels.com/photos/18150815/pexels-photo-18150815.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=600" alt="Cafe at night" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+            <span class="absolute inset-0 bg-coffee-900/0 transition-colors duration-500 group-hover:bg-coffee-900/40"></span>
+            <span class="absolute inset-x-3 bottom-3 translate-y-3 rounded-xl bg-white/90 px-3 py-1.5 text-left text-[11px] font-medium text-coffee-800 opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">Evening vibes</span>
+          </div>
+
+          <!-- 8 -->
+          <div class="reveal d3 group relative overflow-hidden rounded-2xl cursor-pointer gallery-trigger" data-img="https://images.pexels.com/photos/18699459/pexels-photo-18699459.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=1400" data-caption="Cappuccino in natural sunlight">
+            <img src="https://images.pexels.com/photos/18699459/pexels-photo-18699459.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=800&h=600" alt="Morning sunshine cappuccino" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+            <span class="absolute inset-0 bg-coffee-900/0 transition-colors duration-500 group-hover:bg-coffee-900/40"></span>
+            <span class="absolute inset-x-3 bottom-3 translate-y-3 rounded-xl bg-white/90 px-3 py-1.5 text-left text-[11px] font-medium text-coffee-800 opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">Morning cup</span>
+          </div>
+
+          <!-- 9 -->
+          <div class="reveal group relative overflow-hidden rounded-2xl cursor-pointer gallery-trigger" data-img="https://images.pexels.com/photos/37540287/pexels-photo-37540287.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1200&h=1400" data-caption="Barista packing coffee bags at the counter">
+            <img src="https://images.pexels.com/photos/37540287/pexels-photo-37540287.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=800&h=600" alt="Barista packing coffee" loading="lazy" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"/>
+            <span class="absolute inset-0 bg-coffee-900/0 transition-colors duration-500 group-hover:bg-coffee-900/40"></span>
+            <span class="absolute inset-x-3 bottom-3 translate-y-3 rounded-xl bg-white/90 px-3 py-1.5 text-left text-[11px] font-medium text-coffee-800 opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">Barista at work</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lightbox Modal -->
+      <div id="lightbox" class="fixed inset-0 z-[70] hidden items-center justify-center bg-coffee-900/95 p-4 backdrop-blur-md">
+        <button id="lightboxClose" class="absolute top-5 right-5 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-almond-50 hover:bg-white/20 transition-colors">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <button id="lightboxPrev" class="absolute left-3 sm:left-8 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-almond-50 hover:bg-white/20 transition-colors">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button id="lightboxNext" class="absolute right-3 sm:right-8 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-almond-50 hover:bg-white/20 transition-colors">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+
+        <figure class="max-h-[80vh] w-full max-w-4xl">
+          <img id="lightboxImg" src="" alt="" class="max-h-[72vh] w-full rounded-2xl object-contain"/>
+          <figcaption id="lightboxCaption" class="mt-4 text-center text-sm text-almond-200/80"></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- SHOP VIDEO SECTION -->
+    <section id="video" class="relative bg-coffee-900 py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal relative overflow-hidden rounded-[2rem] shadow-2xl shadow-black/40">
+          <img
+            src="https://images.pexels.com/photos/34386522/pexels-photo-34386522.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900"
+            alt="KP Cafe shop video preview"
+            class="h-[22rem] w-full object-cover sm:h-[30rem]"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-coffee-900/85 via-coffee-900/25 to-coffee-900/40"></div>
+
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+            <button id="playVideoBtn" type="button" class="group relative grid h-20 w-20 place-items-center rounded-full bg-almond-100/95 text-coffee-800 shadow-2xl transition-transform duration-300 hover:scale-110">
+              <span class="absolute inset-0 animate-ping rounded-full bg-almond-200/50"></span>
+              <svg class="ml-1 h-8 w-8 fill-current" viewBox="0 0 24 24"><path d="M8 5.14v13.72L19 12 8 5.14Z"/></svg>
+            </button>
+            <p class="mt-6 font-display text-2xl text-almond-50 sm:text-3xl">Take a 40 second tour</p>
+            <p class="mt-2 text-sm text-almond-100/70">Shop video · KP Cafe, Gulberg III</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Player Modal Simulation -->
+      <div id="videoModal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-coffee-900/95 p-4 backdrop-blur">
+        <button id="videoClose" class="absolute top-5 right-5 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-almond-50 hover:bg-white/20 transition-colors">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="w-full max-w-4xl overflow-hidden rounded-2xl bg-black">
+          <div class="relative aspect-video">
+            <img id="videoSlideImg" src="https://images.pexels.com/photos/34386522/pexels-photo-34386522.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900" alt="Video scene" class="h-full w-full object-cover"/>
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-5">
+              <div class="flex items-center gap-3">
+                <span class="flex items-center gap-2 rounded-full bg-red-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white">
+                  <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-white"></span>
+                  Playing Tour
+                </span>
+                <p id="videoCaption" class="text-sm text-white/90">Morning light on the counter</p>
+              </div>
+              <div class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/20">
+                <div id="videoBar" class="h-full bg-almond-300 transition-all duration-300" style="width: 25%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section id="reviews" class="grain relative overflow-hidden bg-almond-100 py-20 sm:py-28">
+      <div class="pointer-events-none absolute -right-20 top-10 h-72 w-72 animate-blob bg-almond-300/60 blur-3xl"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div class="reveal">
+            <div class="flex items-center gap-3">
+              <span class="h-px w-10 bg-coffee-400/60"></span>
+              <span class="text-xs font-semibold uppercase tracking-[0.28em] text-coffee-500">Reviews</span>
+            </div>
+            <h2 class="mt-4 font-display text-3xl font-semibold sm:text-4xl lg:text-5xl text-coffee-800">
+              Loved for the coffee, pastries and warm service.
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-coffee-700/85 sm:text-lg">
+              Highlights from customers who stopped in for coffee, brunch, pastries and a relaxing break.
+            </p>
+          </div>
+
+          <!-- Google Rating Breakdown -->
+          <div class="reveal d1 flex flex-col gap-6 rounded-3xl bg-almond-50 p-6 shadow-lg shadow-coffee-900/5 sm:flex-row sm:items-center">
+            <div class="text-center sm:text-left">
+              <p class="font-display text-5xl text-coffee-800">4.8</p>
+              <div class="mt-2 flex gap-0.5 text-almond-400 justify-center sm:justify-start">
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg>
+              </div>
+              <p class="mt-2 text-xs uppercase tracking-[0.16em] text-coffee-500">1,200+ Google reviews</p>
+            </div>
+            <div class="flex-1 space-y-1.5">
+              <div class="flex items-center gap-2 text-xs text-coffee-600"><span class="w-3">5</span><svg class="h-3 w-3 text-almond-400 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><span class="h-2 flex-1 overflow-hidden rounded-full bg-almond-200"><span class="block h-full w-[82%] rounded-full bg-coffee-500"></span></span><span class="w-8 text-right">82%</span></div>
+              <div class="flex items-center gap-2 text-xs text-coffee-600"><span class="w-3">4</span><svg class="h-3 w-3 text-almond-400 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><span class="h-2 flex-1 overflow-hidden rounded-full bg-almond-200"><span class="block h-full w-[12%] rounded-full bg-coffee-500"></span></span><span class="w-8 text-right">12%</span></div>
+              <div class="flex items-center gap-2 text-xs text-coffee-600"><span class="w-3">3</span><svg class="h-3 w-3 text-almond-400 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><span class="h-2 flex-1 overflow-hidden rounded-full bg-almond-200"><span class="block h-full w-[4%] rounded-full bg-coffee-500"></span></span><span class="w-8 text-right">4%</span></div>
+              <div class="flex items-center gap-2 text-xs text-coffee-600"><span class="w-3">2</span><svg class="h-3 w-3 text-almond-400 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><span class="h-2 flex-1 overflow-hidden rounded-full bg-almond-200"><span class="block h-full w-[1%] rounded-full bg-coffee-500"></span></span><span class="w-8 text-right">1%</span></div>
+              <div class="flex items-center gap-2 text-xs text-coffee-600"><span class="w-3">1</span><svg class="h-3 w-3 text-almond-400 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><span class="h-2 flex-1 overflow-hidden rounded-full bg-almond-200"><span class="block h-full w-[1%] rounded-full bg-coffee-500"></span></span><span class="w-8 text-right">1%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel -->
+        <div class="reveal d2 relative mt-12">
+          <div class="overflow-hidden">
+            <div id="reviewsTrack" class="flex transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)]">
+              <!-- Review 1 -->
+              <div class="w-full shrink-0 px-0 sm:w-1/2 sm:px-3 lg:w-1/3">
+                <article class="flex h-full flex-col justify-between rounded-3xl bg-almond-50 p-7 shadow-lg shadow-coffee-900/5 hover:shadow-xl transition-shadow">
+                  <div>
+                    <div class="flex gap-0.5 text-almond-400"><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg></div>
+                    <p class="mt-4 text-[15px] leading-relaxed text-coffee-700">“The almond latte is honestly the best I have had in Lahore. Warm staff, calm music and the croissants are always fresh.”</p>
+                  </div>
+                  <div class="mt-6 flex items-center gap-3 border-t border-coffee-200/70 pt-5">
+                    <span class="grid h-11 w-11 place-items-center rounded-full bg-coffee-700 font-display text-almond-100">A</span>
+                    <div><p class="text-sm font-semibold text-coffee-800">Ayesha Khan</p><p class="text-xs text-coffee-500">Local Guide · 42 reviews</p></div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Review 2 -->
+              <div class="w-full shrink-0 px-0 sm:w-1/2 sm:px-3 lg:w-1/3">
+                <article class="flex h-full flex-col justify-between rounded-3xl bg-almond-50 p-7 shadow-lg shadow-coffee-900/5 hover:shadow-xl transition-shadow">
+                  <div>
+                    <div class="flex gap-0.5 text-almond-400"><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg></div>
+                    <p class="mt-4 text-[15px] leading-relaxed text-coffee-700">“Ordered ahead for pickup and it was ready in six minutes. Great espresso, fair prices and a really cozy corner to work from.”</p>
+                  </div>
+                  <div class="mt-6 flex items-center gap-3 border-t border-coffee-200/70 pt-5">
+                    <span class="grid h-11 w-11 place-items-center rounded-full bg-coffee-700 font-display text-almond-100">H</span>
+                    <div><p class="text-sm font-semibold text-coffee-800">Hamza Raza</p><p class="text-xs text-coffee-500">Google review</p></div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Review 3 -->
+              <div class="w-full shrink-0 px-0 sm:w-1/2 sm:px-3 lg:w-1/3">
+                <article class="flex h-full flex-col justify-between rounded-3xl bg-almond-50 p-7 shadow-lg shadow-coffee-900/5 hover:shadow-xl transition-shadow">
+                  <div>
+                    <div class="flex gap-0.5 text-almond-400"><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg></div>
+                    <p class="mt-4 text-[15px] leading-relaxed text-coffee-700">“Came for the crepes, stayed for the coffee. The Nutella crepe is huge — perfect for sharing on a slow Sunday morning.”</p>
+                  </div>
+                  <div class="mt-6 flex items-center gap-3 border-t border-coffee-200/70 pt-5">
+                    <span class="grid h-11 w-11 place-items-center rounded-full bg-coffee-700 font-display text-almond-100">S</span>
+                    <div><p class="text-sm font-semibold text-coffee-800">Sana Iqbal</p><p class="text-xs text-coffee-500">Google review</p></div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Review 4 -->
+              <div class="w-full shrink-0 px-0 sm:w-1/2 sm:px-3 lg:w-1/3">
+                <article class="flex h-full flex-col justify-between rounded-3xl bg-almond-50 p-7 shadow-lg shadow-coffee-900/5 hover:shadow-xl transition-shadow">
+                  <div>
+                    <div class="flex gap-0.5 text-almond-400"><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 text-almond-200/50 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg></div>
+                    <p class="mt-4 text-[15px] leading-relaxed text-coffee-700">“Bought two bags of the Midnight Espresso for home. The roast date was only three days old. You can taste the difference.”</p>
+                  </div>
+                  <div class="mt-6 flex items-center gap-3 border-t border-coffee-200/70 pt-5">
+                    <span class="grid h-11 w-11 place-items-center rounded-full bg-coffee-700 font-display text-almond-100">B</span>
+                    <div><p class="text-sm font-semibold text-coffee-800">Bilal Ahmed</p><p class="text-xs text-coffee-500">Google review</p></div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Review 5 -->
+              <div class="w-full shrink-0 px-0 sm:w-1/2 sm:px-3 lg:w-1/3">
+                <article class="flex h-full flex-col justify-between rounded-3xl bg-almond-50 p-7 shadow-lg shadow-coffee-900/5 hover:shadow-xl transition-shadow">
+                  <div>
+                    <div class="flex gap-0.5 text-almond-400"><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45-4.7-4.6 6.5-.95L12 2.6Z"/></svg></div>
+                    <p class="mt-4 text-[15px] leading-relaxed text-coffee-700">“My go-to study spot. Fast wifi, outlets at every table and the staff never rush you out. Feels like a second living room.”</p>
+                  </div>
+                  <div class="mt-6 flex items-center gap-3 border-t border-coffee-200/70 pt-5">
+                    <span class="grid h-11 w-11 place-items-center rounded-full bg-coffee-700 font-display text-almond-100">Z</span>
+                    <div><p class="text-sm font-semibold text-coffee-800">Zara Mehdi</p><p class="text-xs text-coffee-500">Instagram · @zara.mehdi</p></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="mt-8 flex items-center justify-center gap-4">
+            <button id="revPrev" class="grid h-11 w-11 place-items-center rounded-full bg-almond-50 text-coffee-700 shadow hover:bg-coffee-700 hover:text-almond-50 transition-colors">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <div id="revDots" class="flex gap-2"></div>
+            <button id="revNext" class="grid h-11 w-11 place-items-center rounded-full bg-almond-50 text-coffee-700 shadow hover:bg-coffee-700 hover:text-almond-50 transition-colors">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT / CONTACT SECTION -->
+    <section id="visit" class="relative bg-almond-50 py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal">
+          <div class="flex items-center gap-3">
+            <span class="h-px w-10 bg-coffee-400/60"></span>
+            <span class="text-xs font-semibold uppercase tracking-[0.28em] text-coffee-500">Visit</span>
+          </div>
+          <h2 class="mt-4 font-display text-3xl font-semibold sm:text-4xl lg:text-5xl text-coffee-800">
+            Visit KP Cafe on MM Alam Road.
+          </h2>
+          <p class="mt-4 max-w-2xl text-base leading-relaxed text-coffee-700/85 sm:text-lg">
+            We are right in the middle of Gulberg III — look for the almond coloured awning, the bicycle out front and the smell of fresh espresso.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+          <!-- Info Column -->
+          <div class="reveal space-y-4 lg:col-span-1">
+            <!-- Address -->
+            <a href="https://www.google.com/maps/dir/?api=1&destination=MM+Alam+Road+Gulberg+III+Lahore" target="_blank" rel="noopener noreferrer" class="group flex gap-4 rounded-3xl bg-almond-100 p-6 transition-all hover:-translate-y-1 hover:shadow-lg">
+              <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-coffee-700 text-almond-100">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-coffee-500">Address</p>
+                <p class="mt-1 text-[15px] leading-relaxed text-coffee-800">Shop 7, Almond Arcade, 142-B MM Alam Road, Gulberg III, Lahore 54000</p>
+                <p class="mt-2 text-sm font-medium text-coffee-600 underline decoration-almond-400 underline-offset-4 group-hover:text-coffee-800">Get directions →</p>
+              </div>
+            </a>
+
+            <!-- Phone -->
+            <a href="tel:+923004765233" class="group flex gap-4 rounded-3xl bg-almond-100 p-6 transition-all hover:-translate-y-1 hover:shadow-lg">
+              <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-coffee-700 text-almond-100">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+              </span>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-coffee-500">Phone</p>
+                <p class="mt-1 text-[15px] text-coffee-800">+92 300 476 5233</p>
+                <p class="mt-2 text-sm font-medium text-coffee-600 group-hover:text-coffee-800">Call or WhatsApp us</p>
+              </div>
+            </a>
+
+            <!-- Hours -->
+            <div class="flex gap-4 rounded-3xl bg-coffee-800 p-6">
+              <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-almond-200 text-coffee-800">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg>
+              </span>
+              <div class="w-full">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-almond-300">Hours</p>
+                <ul class="mt-2 space-y-1.5 text-sm text-almond-100/90">
+                  <li class="flex items-center justify-between gap-4"><span>Monday – Friday</span><span class="font-medium text-almond-200">8:00 AM – 11:00 PM</span></li>
+                  <li class="flex items-center justify-between gap-4"><span>Saturday</span><span class="font-medium text-almond-200">8:00 AM – 12:00 AM</span></li>
+                  <li class="flex items-center justify-between gap-4"><span>Sunday</span><span class="font-medium text-almond-200">9:00 AM – 11:00 PM</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Follow along -->
+            <div class="rounded-3xl border border-coffee-200 bg-almond-100/60 p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-coffee-500">Follow along</p>
+              <p class="mt-2 text-sm text-coffee-700/80">New roasts, seasonal drinks and weekend specials.</p>
+              <div class="mt-4 flex items-center gap-2">
+                <a href="https://wa.me/923004765233" target="_blank" class="grid h-10 w-10 place-items-center rounded-full bg-almond-100 text-coffee-700 ring-1 ring-coffee-200 transition-all hover:bg-[#25D366] hover:text-white"><svg class="h-4 w-4 fill-current" viewBox="0 0 32 32"><path d="M16.04 4C9.96 4 5.02 8.94 5.02 15.02c0 1.98.53 3.9 1.53 5.6L4.5 28l7.55-1.98a11 11 0 0 0 3.99.74h.01c6.08 0 11.02-4.94 11.02-11.02C27.07 8.94 22.12 4 16.04 4Z"/></svg></a>
+                <a href="https://instagram.com/kpcafe" target="_blank" class="grid h-10 w-10 place-items-center rounded-full bg-almond-100 text-coffee-700 ring-1 ring-coffee-200 transition-all hover:bg-coffee-700 hover:text-almond-50"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></a>
+                <a href="https://facebook.com/kpcafe" target="_blank" class="grid h-10 w-10 place-items-center rounded-full bg-almond-100 text-coffee-700 ring-1 ring-coffee-200 transition-all hover:bg-[#1877F2] hover:text-white"><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6A21 21 0 0 0 14.3 3.5c-2.4 0-4 1.45-4 4.12V9.9H7.6V13h2.7v8h3.2Z"/></svg></a>
+                <a href="https://tiktok.com/@kpcafe" target="_blank" class="grid h-10 w-10 place-items-center rounded-full bg-almond-100 text-coffee-700 ring-1 ring-coffee-200 transition-all hover:bg-black hover:text-white"><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="M16.5 3c.3 2.1 1.6 3.4 3.7 3.6v2.5c-1.3.1-2.5-.3-3.7-1.1v5.7A5.42 5.42 0 0 1 11 19a5.5 5.5 0 0 1-2.9-10.2v2.7a2.8 2.8 0 1 0 2 2.7V3h6.4Z"/></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- OpenStreetMap -->
+          <div class="reveal d1 lg:col-span-2">
+            <div class="h-[28rem] overflow-hidden rounded-[2rem] border border-coffee-200 shadow-xl shadow-coffee-900/10 lg:h-full">
+              <iframe
+                title="KP Cafe Location on MM Alam Road"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=74.3306%2C31.5134%2C74.3566%2C31.5274&layer=mapnik&marker=31.5204%2C74.3436"
+                class="h-full w-full grayscale-[0.2] contrast-[1.05]"
+                style="border: 0;"
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Cards -->
+        <div class="reveal d2 mt-8 grid gap-4 sm:grid-cols-3">
+          <a href="https://wa.me/923004765233" target="_blank" class="group flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-almond-200 text-coffee-700 group-hover:bg-[#25D366] group-hover:text-white transition-colors">
+              <svg class="h-5 w-5 fill-current" viewBox="0 0 32 32"><path d="M16.04 4C9.96 4 5.02 8.94 5.02 15.02c0 1.98.53 3.9 1.53 5.6L4.5 28l7.55-1.98a11 11 0 0 0 3.99.74h.01c6.08 0 11.02-4.94 11.02-11.02C27.07 8.94 22.12 4 16.04 4Z"/></svg>
+            </span>
+            <div><p class="font-semibold text-coffee-800">Message us</p><p class="text-xs text-coffee-500">Quickest way to reserve a table</p></div>
+          </a>
+
+          <a href="https://instagram.com/kpcafe" target="_blank" class="group flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-almond-200 text-coffee-700 group-hover:bg-coffee-700 group-hover:text-almond-100 transition-colors">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+            </span>
+            <div><p class="font-semibold text-coffee-800">Daily specials</p><p class="text-xs text-coffee-500">@kpcafe stories every morning</p></div>
+          </a>
+
+          <a href="https://facebook.com/kpcafe" target="_blank" class="group flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-almond-200 text-coffee-700 group-hover:bg-[#1877F2] group-hover:text-white transition-colors">
+              <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6A21 21 0 0 0 14.3 3.5c-2.4 0-4 1.45-4 4.12V9.9H7.6V13h2.7v8h3.2Z"/></svg>
+            </span>
+            <div><p class="font-semibold text-coffee-800">Events & offers</p><p class="text-xs text-coffee-500">Live music every Friday night</p></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="relative overflow-hidden bg-coffee-900 pt-16 text-almond-100">
+      <div class="pointer-events-none absolute -top-24 -left-24 h-72 w-72 animate-float-slow rounded-full bg-coffee-700/40 blur-3xl"></div>
+
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 pb-12 md:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="grid h-11 w-11 place-items-center rounded-2xl bg-almond-200 text-coffee-800">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"/></svg>
+              </span>
+              <span class="font-display text-2xl text-almond-50">KP <span class="text-almond-300">Cafe</span></span>
+            </div>
+            <p class="mt-5 max-w-xs text-sm leading-relaxed text-almond-100/70">
+              A cozy neighbourhood cafe roasting small batch coffee, baking every morning and keeping the kettle warm till late.
+            </p>
+            <div class="mt-6 flex items-center gap-2">
+              <a href="https://wa.me/923004765233" target="_blank" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-almond-100 ring-1 ring-white/20 hover:bg-[#25D366] hover:text-white transition-all"><svg class="h-4 w-4 fill-current" viewBox="0 0 32 32"><path d="M16.04 4C9.96 4 5.02 8.94 5.02 15.02c0 1.98.53 3.9 1.53 5.6L4.5 28l7.55-1.98a11 11 0 0 0 3.99.74h.01c6.08 0 11.02-4.94 11.02-11.02C27.07 8.94 22.12 4 16.04 4Z"/></svg></a>
+              <a href="https://instagram.com/kpcafe" target="_blank" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-almond-100 ring-1 ring-white/20 hover:bg-white/20 transition-all"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg></a>
+              <a href="https://facebook.com/kpcafe" target="_blank" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-almond-100 ring-1 ring-white/20 hover:bg-[#1877F2] hover:text-white transition-all"><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6A21 21 0 0 0 14.3 3.5c-2.4 0-4 1.45-4 4.12V9.9H7.6V13h2.7v8h3.2Z"/></svg></a>
+              <a href="https://tiktok.com/@kpcafe" target="_blank" class="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-almond-100 ring-1 ring-white/20 hover:bg-black hover:text-white transition-all"><svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="M16.5 3c.3 2.1 1.6 3.4 3.7 3.6v2.5c-1.3.1-2.5-.3-3.7-1.1v5.7A5.42 5.42 0 0 1 11 19a5.5 5.5 0 0 1-2.9-10.2v2.7a2.8 2.8 0 1 0 2 2.7V3h6.4Z"/></svg></a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-[0.24em] text-almond-300">Explore</h3>
+            <ul class="mt-5 space-y-3 text-sm">
+              <li><a href="#welcome" class="text-almond-100/75 hover:text-almond-300 transition-colors">Welcome</a></li>
+              <li><a href="#order" class="text-almond-100/75 hover:text-almond-300 transition-colors">Order</a></li>
+              <li><a href="#beans" class="text-almond-100/75 hover:text-almond-300 transition-colors">Coffee Bags</a></li>
+              <li><a href="#gallery" class="text-almond-100/75 hover:text-almond-300 transition-colors">Gallery</a></li>
+              <li><a href="#reviews" class="text-almond-100/75 hover:text-almond-300 transition-colors">Reviews</a></li>
+              <li><a href="#visit" class="text-almond-100/75 hover:text-almond-300 transition-colors">Visit</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-[0.24em] text-almond-300">Hours</h3>
+            <ul class="mt-5 space-y-3 text-sm text-almond-100/75">
+              <li class="flex justify-between gap-3"><span>Mon – Fri</span><span class="text-almond-300">8:00 AM – 11:00 PM</span></li>
+              <li class="flex justify-between gap-3"><span>Saturday</span><span class="text-almond-300">8:00 AM – 12:00 AM</span></li>
+              <li class="flex justify-between gap-3"><span>Sunday</span><span class="text-almond-300">9:00 AM – 11:00 PM</span></li>
+            </ul>
+            <p class="mt-4 flex items-center gap-2 text-xs text-almond-100/60">
+              <svg class="h-4 w-4 text-almond-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg>
+              Open every day of the year
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xs font-semibold uppercase tracking-[0.24em] text-almond-300">Find us</h3>
+            <ul class="mt-5 space-y-4 text-sm text-almond-100/75">
+              <li class="flex gap-3">
+                <svg class="mt-0.5 h-5 w-5 shrink-0 text-almond-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Shop 7, Almond Arcade, 142-B MM Alam Road, Gulberg III, Lahore</span>
+              </li>
+              <li class="flex gap-3">
+                <svg class="mt-0.5 h-5 w-5 shrink-0 text-almond-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+                <a href="tel:+923004765233" class="hover:text-almond-300">+92 300 476 5233</a>
+              </li>
+              <li>
+                <a href="https://tiktok.com/@kpcafe" target="_blank" class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-almond-100 hover:bg-white/20 transition-colors">
+                  <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24"><path d="M16.5 3c.3 2.1 1.6 3.4 3.7 3.6v2.5c-1.3.1-2.5-.3-3.7-1.1v5.7A5.42 5.42 0 0 1 11 19a5.5 5.5 0 0 1-2.9-10.2v2.7a2.8 2.8 0 1 0 2 2.7V3h6.4Z"/></svg>
+                  Watch us on TikTok
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-center justify-between gap-4 border-t border-white/10 py-6 text-xs text-almond-100/60 sm:flex-row">
+          <p>© 2026 KP Cafe. Brewed with care in Lahore.</p>
+          <p class="flex items-center gap-2">Made with <span class="text-almond-300">♥</span> and a lot of espresso</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating Buttons (WhatsApp & Back to Top) -->
+    <div class="fixed right-4 bottom-4 z-40 flex flex-col items-center gap-3 sm:right-6 sm:bottom-6">
+      <button id="backToTop" type="button" aria-label="Back to top" class="grid h-12 w-12 place-items-center rounded-full bg-coffee-800 text-almond-100 shadow-lg shadow-coffee-900/30 transition-all duration-300 hover:bg-coffee-700 opacity-0 pointer-events-none">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      </button>
+
+      <a href="https://wa.me/923004765233?text=Hi%20KP%20Cafe!%20I'd%20like%20to%20know%20more." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" class="group relative grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-xl shadow-[#25D366]/30 transition-transform duration-300 hover:scale-110">
+        <span class="absolute inset-0 animate-ping rounded-full bg-[#25D366]/40"></span>
+        <svg class="h-7 w-7 fill-current" viewBox="0 0 32 32">
+          <path d="M16.04 4C9.96 4 5.02 8.94 5.02 15.02c0 1.98.53 3.9 1.53 5.6L4.5 28l7.55-1.98a11 11 0 0 0 3.99.74h.01c6.08 0 11.02-4.94 11.02-11.02C27.07 8.94 22.12 4 16.04 4Zm0 20.15c-1.32 0-2.62-.36-3.76-1.03l-.27-.16-4.48 1.18 1.2-4.37-.17-.28a8.98 8.98 0 0 1-1.37-4.79c0-4.98 4.05-9.03 9.03-9.03 2.41 0 4.68.94 6.38 2.65a8.96 8.96 0 0 1 2.64 6.38c0 4.98-4.05 9.03-9.03 9.03Z"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Interactive Vanilla JS -->
+    <script>
+      // 1. Scroll Reveal Animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      // 2. Navbar and Scroll Progress
+      const navbar = document.getElementById('navbar');
+      const logoIcon = document.getElementById('logoIcon');
+      const logoText = document.getElementById('logoText');
+      const logoSub = document.getElementById('logoSub');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const scrollProgress = document.getElementById('scrollProgress');
+      const backToTop = document.getElementById('backToTop');
+
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrolled / totalHeight) * 100;
+        scrollProgress.style.width = progress + '%';
+
+        if (scrolled > 50) {
+          navbar.classList.remove('bg-gradient-to-b', 'from-coffee-900/70', 'to-transparent');
+          navbar.classList.add('bg-almond-50/95', 'shadow-md', 'backdrop-blur-md');
+          logoIcon.classList.remove('bg-almond-100', 'text-coffee-800');
+          logoIcon.classList.add('bg-coffee-700', 'text-almond-100');
+          logoText.classList.remove('text-almond-50');
+          logoText.classList.add('text-coffee-800');
+          logoSub.classList.remove('text-almond-200/80');
+          logoSub.classList.add('text-coffee-500');
+          navLinks.forEach(link => {
+            link.classList.remove('text-almond-100/90');
+            link.classList.add('text-coffee-700');
+          });
+        } else {
+          navbar.classList.add('bg-gradient-to-b', 'from-coffee-900/70', 'to-transparent');
+          navbar.classList.remove('bg-almond-50/95', 'shadow-md', 'backdrop-blur-md');
+          logoIcon.classList.add('bg-almond-100', 'text-coffee-800');
+          logoIcon.classList.remove('bg-coffee-700', 'text-almond-100');
+          logoText.classList.add('text-almond-50');
+          logoText.classList.remove('text-coffee-800');
+          logoSub.classList.add('text-almond-200/80');
+          logoSub.classList.remove('text-coffee-500');
+          navLinks.forEach(link => {
+            link.classList.add('text-almond-100/90');
+            link.classList.remove('text-coffee-700');
+          });
+        }
+
+        if (scrolled > 400) {
+          backToTop.classList.remove('opacity-0', 'pointer-events-none');
+          backToTop.classList.add('opacity-100', 'pointer-events-auto');
+        } else {
+          backToTop.classList.add('opacity-0', 'pointer-events-none');
+          backToTop.classList.remove('opacity-100', 'pointer-events-auto');
+        }
+      });
+
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 3. Mobile Hamburger Menu
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const drawerOverlay = document.getElementById('drawerOverlay');
+      const hamburgerIcon = document.getElementById('hamburgerIcon');
+      const closeIcon = document.getElementById('closeIcon');
+      let menuOpen = false;
+
+      function toggleMenu(open) {
+        menuOpen = open;
+        if (menuOpen) {
+          mobileDrawer.classList.remove('translate-x-full');
+          mobileDrawer.classList.add('translate-x-0');
+          drawerOverlay.classList.remove('opacity-0', 'pointer-events-none');
+          drawerOverlay.classList.add('opacity-100', 'pointer-events-auto');
+          hamburgerIcon.classList.add('hidden');
+          closeIcon.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        } else {
+          mobileDrawer.classList.add('translate-x-full');
+          mobileDrawer.classList.remove('translate-x-0');
+          drawerOverlay.classList.add('opacity-0', 'pointer-events-none');
+          drawerOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+          hamburgerIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      }
+
+      menuBtn.addEventListener('click', () => toggleMenu(!menuOpen));
+      drawerOverlay.addEventListener('click', () => toggleMenu(false));
+      document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => toggleMenu(false));
+      });
+
+      // 4. Gallery Lightbox
+      const galleryTriggers = Array.from(document.querySelectorAll('.gallery-trigger'));
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const lightboxClose = document.getElementById('lightboxClose');
+      const lightboxPrev = document.getElementById('lightboxPrev');
+      const lightboxNext = document.getElementById('lightboxNext');
+      let currentGalleryIdx = 0;
+
+      function openLightbox(idx) {
+        currentGalleryIdx = idx;
+        const trigger = galleryTriggers[idx];
+        lightboxImg.src = trigger.dataset.img;
+        lightboxCaption.textContent = trigger.dataset.caption + ' · ' + (idx + 1) + ' / ' + galleryTriggers.length;
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+
+      galleryTriggers.forEach((trigger, idx) => {
+        trigger.addEventListener('click', () => openLightbox(idx));
+      });
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightboxPrev.addEventListener('click', () => {
+        currentGalleryIdx = (currentGalleryIdx - 1 + galleryTriggers.length) % galleryTriggers.length;
+        openLightbox(currentGalleryIdx);
+      });
+      lightboxNext.addEventListener('click', () => {
+        currentGalleryIdx = (currentGalleryIdx + 1) % galleryTriggers.length;
+        openLightbox(currentGalleryIdx);
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('hidden')) {
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') lightboxPrev.click();
+          if (e.key === 'ArrowRight') lightboxNext.click();
+        }
+      });
+
+      // 5. Video Tour Simulation Modal
+      const playVideoBtn = document.getElementById('playVideoBtn');
+      const videoModal = document.getElementById('videoModal');
+      const videoClose = document.getElementById('videoClose');
+      const videoSlideImg = document.getElementById('videoSlideImg');
+      const videoCaption = document.getElementById('videoCaption');
+      const videoBar = document.getElementById('videoBar');
+      let videoTimer = null;
+      let videoIdx = 0;
+
+      const videoScenes = [
+        { img: 'https://images.pexels.com/photos/34386522/pexels-photo-34386522.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900', text: 'Morning light on the counter' },
+        { img: 'https://images.pexels.com/photos/18150815/pexels-photo-18150815.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900', text: 'Evening rush, warm lamps on' },
+        { img: 'https://images.pexels.com/photos/37540287/pexels-photo-37540287.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900', text: 'Packing your coffee bag fresh' },
+        { img: 'https://images.pexels.com/photos/18721993/pexels-photo-18721993.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900', text: 'The plant corner everyone loves' }
+      ];
+
+      function startVideoTour() {
+        videoModal.classList.remove('hidden');
+        videoModal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        videoIdx = 0;
+        updateVideoScene();
+        videoTimer = setInterval(() => {
+          videoIdx = (videoIdx + 1) % videoScenes.length;
+          updateVideoScene();
+        }, 3200);
+      }
+
+      function updateVideoScene() {
+        const scene = videoScenes[videoIdx];
+        videoSlideImg.src = scene.img;
+        videoCaption.textContent = scene.text;
+        videoBar.style.width = ((videoIdx + 1) / videoScenes.length * 100) + '%';
+      }
+
+      function stopVideoTour() {
+        videoModal.classList.add('hidden');
+        videoModal.classList.remove('flex');
+        document.body.style.overflow = '';
+        if (videoTimer) clearInterval(videoTimer);
+      }
+
+      playVideoBtn.addEventListener('click', startVideoTour);
+      videoClose.addEventListener('click', stopVideoTour);
+
+      // 6. Reviews Carousel
+      const reviewsTrack = document.getElementById('reviewsTrack');
+      const revPrev = document.getElementById('revPrev');
+      const revNext = document.getElementById('revNext');
+      const revDots = document.getElementById('revDots');
+      const totalReviews = 5;
+      let curReview = 0;
+
+      function getPerView() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 640) return 2;
+        return 1;
+      }
+
+      function maxReviewIdx() {
+        return Math.max(0, totalReviews - getPerView());
+      }
+
+      function renderDots() {
+        revDots.innerHTML = '';
+        const max = maxReviewIdx();
+        for (let i = 0; i <= max; i++) {
+          const dot = document.createElement('button');
+          dot.className = 'h-2 rounded-full transition-all duration-300 ' + (i === curReview ? 'w-8 bg-coffee-700' : 'w-2 bg-coffee-300');
+          dot.onclick = () => { curReview = i; updateReviewPos(); };
+          revDots.appendChild(dot);
+        }
+      }
+
+      function updateReviewPos() {
+        const per = getPerView();
+        const offset = curReview * (100 / per);
+        reviewsTrack.style.transform = `translateX(-${offset}%)`;
+        renderDots();
+      }
+
+      revPrev.addEventListener('click', () => {
+        curReview = curReview <= 0 ? maxReviewIdx() : curReview - 1;
+        updateReviewPos();
+      });
+
+      revNext.addEventListener('click', () => {
+        curReview = curReview >= maxReviewIdx() ? 0 : curReview + 1;
+        updateReviewPos();
+      });
+
+      window.addEventListener('resize', () => {
+        if (curReview > maxReviewIdx()) curReview = maxReviewIdx();
+        updateReviewPos();
+      });
+
+      setInterval(() => {
+        curReview = curReview >= maxReviewIdx() ? 0 : curReview + 1;
+        updateReviewPos();
+      }, 5000);
+
+      renderDots();
+    </script>
+  </body>
+</html>
